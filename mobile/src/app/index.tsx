@@ -1,7 +1,14 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 
+import { router } from "expo-router";
+
 export default function HomeScreen() {
-  return <Pressable style={styles.container}>Привет, Рим!</Pressable>;
+  return (
+    <>
+      <Pressable onPress={() => router.push("/auth/login")}>Для сотрудников</Pressable>
+      <Pressable onPress={() => router.push("/auth/login")}>Для охраны</Pressable>
+    </>
+  );
 }
 
 const styles = StyleSheet.create({
