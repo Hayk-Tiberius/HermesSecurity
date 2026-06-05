@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from "@nestjs/common";
+import { Controller, Get, Param, Query } from "@nestjs/common";
 import { DatabaseService } from "./db.service";
 
 @Controller("database")
@@ -13,5 +13,10 @@ export class DatabaseController {
     @Get("columns/:tableName")
     getColumns(@Param("tableName") tableName: string) {
         return this.databaseService.getColumns(tableName);
+    }
+
+    @Get("fio")
+    getLoginData(@Query("username") username: string) {
+        return this.databaseService.getLoginData(username);
     }
 }

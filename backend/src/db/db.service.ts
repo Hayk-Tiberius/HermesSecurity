@@ -27,4 +27,14 @@ export class DatabaseService {
             [tableName],
         );
     }
+
+    async getLoginData(username: string) {
+        return this.dataSource.query(
+            `SELECT username, password_hash
+     FROM hermesemployers
+     WHERE username = $1
+     LIMIT 1`,
+            [username],
+        );
+    }
 }
