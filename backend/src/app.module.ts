@@ -1,19 +1,19 @@
-import { Module } from "@nestjs/common";
-import { AuthModule } from "./auth/auth.module";
-import { UsersModule } from "./user/user.module";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { UsersService } from "./user/user.service";
-import { DatabaseModule } from "./db/db.module";
+import { Module } from '@nestjs/common';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './user/user.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersService } from './user/user.service';
+import { DatabaseModule } from './db/db.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: "postgres",
-      host: "localhost",
+      type: 'postgres',
+      host: 'localhost',
       port: 5432,
-      username: "postgres",
-      password: "vonSaschen",
-      database: "postgres",
+      username: 'postgres',
+      password: 'vonSaschen',
+      database: 'Hermes',
 
       autoLoadEntities: true,
 
@@ -25,4 +25,4 @@ import { DatabaseModule } from "./db/db.module";
   ],
   providers: [UsersService],
 })
-export class AppModule { }
+export class AppModule {}

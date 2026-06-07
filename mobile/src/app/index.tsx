@@ -1,26 +1,15 @@
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  Alert,
-  ActivityIndicator,
-} from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, Alert, ActivityIndicator } from "react-native";
 import { useState } from "react";
 
 import { router } from "expo-router";
 
-
 export default function HomeScreen() {
-
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async () => {
-
-
     try {
-      const response = await fetch("http://localhost:4242/api/auth/login", {
+      const response = await fetch("http://localhost:4242/api/auth/main", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,7 +18,7 @@ export default function HomeScreen() {
           username,
           password,
         }),
-      })
+      });
       const data = await response.json();
 
       console.log("STATUS:", response.status);
@@ -39,18 +28,20 @@ export default function HomeScreen() {
         console.error("Ошибка авторизации:", data);
         return;
       }
-      router.replace("/auth/login");
+      router.replace({
+        pathname: "/auth/main",
+        params: {
+          firstName: data.firstName,
+          lastName: data.lastName,
+        },
+      });
+    } catch (error) {
+      console.error("Ошибка запроса", error);
     }
-
-
-    catch (error) {
-      console.error("Ошибка запроса", error)
-    }
-  }
+  };
   return (
     <>
       <TextInput
-
         placeholder="Пользователь"
         value={username}
         onChangeText={setUsername}
@@ -58,17 +49,9 @@ export default function HomeScreen() {
         autoCorrect={false}
       />
 
-      <TextInput
+      <TextInput placeholder="Пароль" value={password} onChangeText={setPassword} secureTextEntry />
 
-        placeholder="Пароль"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-
-      <Pressable
-        onPress={handleSubmit}
-      >
+      <Pressable onPress={handleSubmit}>
         <Text>Войти</Text>
       </Pressable>
     </>
