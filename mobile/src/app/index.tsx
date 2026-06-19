@@ -56,7 +56,12 @@ export default function HomeScreen() {
 
       router.replace({
         pathname: "/auth/main",
-        params: { firstName: data.firstName, lastName: data.lastName },
+        params: {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          userRole: data.userRole,
+          jobTitle: data.jobTitle,
+        },
       });
     } catch (e) {
       console.error("Ошибка запроса", e);

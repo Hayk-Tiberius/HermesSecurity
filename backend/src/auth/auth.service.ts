@@ -8,7 +8,7 @@ export class AuthService {
   async login(username: string, password: string) {
     const users = await this.dataSource.query(
       `SELECT id, username, password_hash, user_role,
-          first_name, last_name
+          first_name, last_name, job_title
    FROM employees
    WHERE username = $1
    LIMIT 1`,
@@ -24,9 +24,10 @@ export class AuthService {
     return {
       id: user.id,
       username: user.username,
-      role: user.user_role,
+      userRole: user.user_role,
       firstName: user.first_name,
       lastName: user.last_name,
+      jobTitle: user.job_title,
     };
   }
 }
